@@ -13,20 +13,26 @@ import Foundation
 
 public enum PlistKey
 {
-	case FlickrURL
 	case ConnectionProtocol
+	case FlickrURL
 	case FlickrAPIKey
+	case WeatherURL
+	case WeatherAPIKey
 	
 	func value() -> String
 	{
 		switch self
 		{
-			case .FlickrURL:
-				return "FLICKR_URL"
 			case .ConnectionProtocol:
 				return "PROTOCOL"
+			case .FlickrURL:
+				return "FLICKR_URL"
 			case .FlickrAPIKey:
 				return "FLICKR_API_KEY"
+			case .WeatherURL:
+				return "WEATHER_URL"
+			case .WeatherAPIKey:
+				return "WEATHER_API_KEY"
 		}
 	}
 }
@@ -71,12 +77,16 @@ class Environment
 	{
 		switch key
 		{
-			case .FlickrURL:
-				return infoDictionary[PlistKey.FlickrURL.value()] as! String
 			case .ConnectionProtocol:
 				return infoDictionary[PlistKey.ConnectionProtocol.value()] as! String
+			case .FlickrURL:
+				return infoDictionary[PlistKey.FlickrURL.value()] as! String
 			case .FlickrAPIKey:
 				return infoDictionary[PlistKey.FlickrAPIKey.value()] as! String
+			case .WeatherURL:
+				return infoDictionary[PlistKey.WeatherURL.value()] as! String
+			case .WeatherAPIKey:
+				return infoDictionary[PlistKey.WeatherAPIKey.value()] as! String
 		}
 	}
 }

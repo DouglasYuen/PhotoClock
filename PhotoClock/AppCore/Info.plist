@@ -28,6 +28,10 @@
 	<string>$(PROTOCOL)</string>
 	<key>FLICKR_URL</key>
 	<string>$(FLICKR_URL)</string>
+	<key>WEATHER_URL</key>
+	<string>$(WEATHER_URL)</string>
+	<key>WEATHER_API_KEY</key>
+	<string>$(WEATHER_API_KEY)</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

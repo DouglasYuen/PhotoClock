@@ -20,9 +20,11 @@ public class RemoteAPI
 	//********************
 	
 	static let flickrURL:String = "\(Environment.shared.configuration(.ConnectionProtocol))://\(Environment.shared.configuration(.FlickrURL))"
+	static let weatherURL:String = "\(Environment.shared.configuration(.ConnectionProtocol))://\(Environment.shared.configuration(.WeatherURL))"
+	
 	
 	//********************
-	//MARK:- API CALLS
+	//MARK:- FLICKR API CALLS
 	//********************
 	
 	/**
@@ -32,7 +34,7 @@ public class RemoteAPI
 		- Parameter completionHandler: The callback called after retrieval, containing the call's JSON response and when applicable, an NSError
 	 */
 	
-	// Note: parameters are hard-coded in for simplicity's sake
+	// Note: some parameters are hard-coded in for simplicity's sake
 	
 	static func getImage(for tags:String, onFinish: @escaping (JSON, NSError?) -> Void)
 	{
@@ -46,6 +48,22 @@ public class RemoteAPI
 			"extras": "url_o",
 			"safe_search": "1",
 			"tags": tags
+		] as [String: AnyObject]
+		
+		RequestHelper.requestGET(route, params: params, onFinish: onFinish)
+	}
+	
+	//********************
+	//MARK:- WEATHER API CALLS
+	//********************
+	
+	static func getCurrentWeather(at city:String, onFinish: @escaping (JSON, NSError?) -> Void)
+	{
+		let route = RequestHelper.route(prefix: weatherURL, route:"current.json")
+		
+		let params = [
+			"key": Environment.shared.configuration(.WeatherAPIKey),
+			"q": city
 		] as [String: AnyObject]
 		
 		RequestHelper.requestGET(route, params: params, onFinish: onFinish)
