@@ -7,11 +7,11 @@ This is a sample iOS application that aims to demonstrate use of CoreLocation to
 This project uses the Flickr API. The key is normally contained in the Debug.xcconfig and Release.xcconfig files, but will not be provided for this project. To ensure this project works, developers will need to recreate the Debug.xcconfig and Release.xcconfig files, and then add to each, the following:
 
 - #include "Pods/Target Support Files/Pods-PhotoClock/Pods-PhotoClock.debug.xcconfig"
-- FLICKR_URL = api.flickr.com
 - PROTOCOL = https
+- FLICKR_URL = api.flickr.com
 - FLICKR_API_KEY = <Developer's own FLICKR API Key>
 
-The #include statement is to ensure that the CocoaPods cna find its own *.xcconfig files. Developers can get their own Flickr API key from Flickr after signing up for an account.
+The #include statement is to ensure that the CocoaPods can find its own *.xcconfig files. Developers can get their own Flickr API key from Flickr after signing up for an account.
 
 ## Compatibility
 
