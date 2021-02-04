@@ -1,0 +1,6 @@
+framework module Pods_PhotoClock {
+  umbrella header "Pods-PhotoClock-umbrella.h"
+
+  export *
+  module * { export * }
+}
