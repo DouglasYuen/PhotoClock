@@ -14,39 +14,86 @@ import SwiftyJSON
 
 class PhotoClockViewModel:ViewModelType
 {
-	
 	var delegate: ViewModelDelegate?
 	var photos:[PhotoModel] = []
-	
-	var locationHelper = LocationServiceHelper()
-	
-	var defaultCities:[String] = ["Tokyo", "New York", "Paris", "London", "Hong Kong"]
+	var weather:WeatherModel?
 	var currentCity:String?
+	var locationHelper = LocationServiceHelper() // Create an instance of the location service helper to fetch location data
 	
 	func setupViewModel()
 	{
-	
+		// Implemented to comply with protocol, not used for now
 	}
 
-	// Get the image URL string from either the current location, or from a default list
-	// If location data available, do a search for the current city name on Flickr
-	// Otherwise, use a fallback list
+	// Fetches the data for the view model
+	// Use a dispatch group so we only update once everything comes back
+	// The completion handler parameter, a boolean, indicates whether or not fetching data was succeessful
 	
-	func getImageURLString(onFinish: @escaping (PhotoModel?) -> ())
+	func fetchData(onFinish: @escaping (Bool) -> ())
 	{
-		if let location = self.locationHelper.getCurrentLocationCoordinates()
-		{
-			self.locationHelper.getCurrentCity(from: location){cityName in
-				if let currentCity = cityName
-				{
-					self.currentCity = currentCity
+		self.getCurrentCity(){city in
+			
+			// If the city came back, we can use it, otherwise, stop
+			
+			guard let currentCity = city else
+			{
+				onFinish(false)
+				return
+			}
+			
+			// Create the dispatch group
+			// In the first group, get the images from Flickr for the current city
+			
+			let group = DispatchGroup()
+			
+			group.enter()
+			DispatchQueue.global(qos: .default).async
+			{
+				self.fetchImages(for: currentCity){
+					group.leave()
 				}
 			}
+			
+			// In the second group, get the real time weather for the current city
+			
+			group.enter()
+			DispatchQueue.global(qos: .default).async
+			{
+				self.getCurrentWeather(for: currentCity){
+					group.leave()
+				}
+			}
+			
+			// After leaving both groups, we're done.
+			
+			group.notify(queue: .main)
+			{
+				onFinish(true)
+			}
 		}
+	}
 	
-		self.fetchImages
+	// Retrieves the current city from the location services
+	// Returns null if no city could be found
+	
+	func getCurrentCity(onFinish: @escaping (String?) -> ())
+	{
+		guard let location = self.locationHelper.getCurrentLocationCoordinates() else
 		{
-			onFinish(self.selectRandomImage())
+			onFinish(nil)
+			return
+		}
+		
+		self.locationHelper.getCurrentCity(from: location){cityName in
+			if let currentCity = cityName
+			{
+				onFinish(currentCity)
+			}
+			
+			else
+			{
+				onFinish(nil)
+			}
 		}
 	}
 	
@@ -60,11 +107,11 @@ class PhotoClockViewModel:ViewModelType
 	
 	// From Flickr, grab the image for the city name and with an additional "cityscape" term
 	
-	func fetchImages(onFinish: @escaping () -> ())
+	func fetchImages(for city:String, onFinish: @escaping () -> ())
 	{
 		self.photos.removeAll()
 		
-		let cityTag = "\(self.getCityName()) cityscape"
+		let cityTag = "\(city) cityscape"
 
 		RemoteAPI.getImage(for: cityTag){(response, error) in
 			if error == nil
@@ -90,19 +137,21 @@ class PhotoClockViewModel:ViewModelType
 		}
 	}
 	
-	// Determines which city name to use, whether it's the one returned by the locaiton services or 
+	// Fetches the current weather for the current city
 	
-	private func getCityName() -> String
+	func getCurrentWeather(for city:String, onFinish: @escaping () -> ())
 	{
-		if let theCity = self.currentCity
-		{
-			return theCity
-		}
-		
-		else
-		{
-			let index = Int.random(in: 0..<self.defaultCities.count)
-			return self.defaultCities[index]
+		RemoteAPI.getCurrentWeather(at: city){response, error in
+			if error == nil
+			{
+				self.weather = WeatherModel(json: response)
+				onFinish()
+			}
+			
+			else
+			{
+				onFinish()
+			}
 		}
 	}
 }

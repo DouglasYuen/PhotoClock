@@ -25,6 +25,8 @@ class PhotoClockViewController: AppViewController
 	@IBOutlet weak var TransparentOverlayView: UIView!
 	@IBOutlet weak var TimeLabel: UILabel!
 	@IBOutlet weak var DateLabel: UILabel!
+	@IBOutlet weak var WeatherConditionLabel: UILabel!
+	@IBOutlet weak var WeatherTemperatureLabel: UILabel!
 	
 	let viewModel = PhotoClockViewModel()
 	var timer = Timer()
@@ -52,13 +54,23 @@ class PhotoClockViewController: AppViewController
 		self.DateLabel.textColor = .white
 		self.TimeLabel.textColor = .white
 		self.TimeLabel.textAlignment = .left
+		
+		self.WeatherConditionLabel.textColor = .white
+		self.WeatherTemperatureLabel.textColor = .white
+		
+		// Set these labels to be empty initially
+		
+		self.WeatherConditionLabel.text = ""
+		self.WeatherTemperatureLabel.text = ""
+		
 		self.TimeLabel.font = UIFont.monospacedDigitSystemFont(ofSize: self.TimeLabel.font.pointSize, weight: UIFont.Weight.light)
 		self.updateClock()
 		
 		self.BackgroundImageView.contentMode = .scaleAspectFill
 		self.TransparentOverlayView.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 0.45)
 		
-		self.fetchBackgroundImage()
+		self.setInitialBackground() // Set the initial background
+		self.getWeatherAndImage()
 		
 		// Start the clock
 		
@@ -94,19 +106,58 @@ class PhotoClockViewController: AppViewController
 	// MARK:- PRIVATE VIEW CONTROLLER FUNCTIONS
 	//********************
 	
-	// Fetches the background image
+	// Fetches the background image and weather
+	// If the view model was able to succeed, update the background image and the weather
 	
-	private func fetchBackgroundImage()
+	private func getWeatherAndImage()
 	{
-		self.viewModel.getImageURLString(){photoModel in
-			if let imageURLString = photoModel?.photoURL
+		self.viewModel.fetchData {didSucceed in
+			
+			if didSucceed
 			{
-				if let imageURL:URL = URL(string: imageURLString)
+				let photoModel = self.viewModel.selectRandomImage()
+				
+				if let imageURLString = photoModel.photoURL
 				{
-					self.BackgroundImageView.sd_setImage(with: imageURL, completed: {(image, error, cacheType, imageURL) in
-					})
+					if let imageURL:URL = URL(string: imageURLString)
+					{
+						self.BackgroundImageView.sd_setImage(with: imageURL, completed: {(image, error, cacheType, imageURL) in
+							if let pngRepresentation = image?.pngData() {
+							AppSettings.setBackgroundImage(pngRepresentation)
+							}
+						})
+					}
+				}
+				
+				if let temperature = self.viewModel.weather?.temperatureC
+				{
+					let temperatureInt = Int(temperature)
+					self.WeatherTemperatureLabel.text = String(format: "%d ºC", temperatureInt)
+				}
+				
+				if let condition = self.viewModel.weather?.conditionText
+				{
+					self.WeatherConditionLabel.text = "\(condition)"
 				}
 			}
+		}
+	}
+	
+	// Set the initial background
+	// If there is a locally stored image, use this as the background
+	// Otherwise, use a default image
+	
+	private func setInitialBackground()
+	{
+		if let imageData = AppSettings.getBackgroundImage()
+		{
+			let image = UIImage(data: imageData)
+			self.BackgroundImageView.image = image
+		}
+		
+		else
+		{
+			self.BackgroundImageView.image = #imageLiteral(resourceName: "Background")
 		}
 	}
 }
@@ -117,14 +168,14 @@ class PhotoClockViewController: AppViewController
 
 extension PhotoClockViewController:ViewModelDelegate
 {
-	// Display a loading overlay if called, used when loading something
+	// Used when waiting for data to come back from an async call
 	
 	func willLoadData()
 	{
 		
 	}
 	
-	// Hides the loading overlay and forces the table to refresh, used when an async action is done
+	// Used when an async action is done
 	
 	func didLoadData()
 	{

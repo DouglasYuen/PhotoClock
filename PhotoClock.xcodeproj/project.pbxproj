@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2755679B1E618259AA7D8D15 /* Pods_PhotoClock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EEEDA61EEEEB3CE932D74F5 /* Pods_PhotoClock.framework */; };
+		A500C13025CC567F002D17BA /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A500C12F25CC567F002D17BA /* WeatherModel.swift */; };
 		A51C547825C211C30019D21F /* PhotoClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51C547725C211C30019D21F /* PhotoClockViewController.swift */; };
 		A51C548025C211CF0019D21F /* PhotoClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51C547F25C211CF0019D21F /* PhotoClockViewModel.swift */; };
 		A51C548625C211E50019D21F /* ViewModelSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51C548525C211E50019D21F /* ViewModelSupport.swift */; };
@@ -25,6 +26,7 @@
 		A59F330025C9FE6100318EC1 /* SettingSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59F32FF25C9FE6100318EC1 /* SettingSections.swift */; };
 		A59F331725CA010C00318EC1 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59F331625CA010C00318EC1 /* PhotoModel.swift */; };
 		A5B58D7E25C3298900DC9567 /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B58D7D25C3298900DC9567 /* AppViewController.swift */; };
+		A5D9AACA25CDBCCD006F67C9 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D9AAC925CDBCCD006F67C9 /* AppSettings.swift */; };
 		A5FEFB7425C9F64C00425766 /* LocationServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FEFB7325C9F64C00425766 /* LocationServiceHelper.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +51,7 @@
 		1EEEDA61EEEEB3CE932D74F5 /* Pods_PhotoClock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoClock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		338FCEB563B59AD9D5FB0F7E /* Pods-PhotoClock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoClock.debug.xcconfig"; path = "Target Support Files/Pods-PhotoClock/Pods-PhotoClock.debug.xcconfig"; sourceTree = "<group>"; };
 		7516158B22957F0D88AAC276 /* Pods-PhotoClock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoClock.release.xcconfig"; path = "Target Support Files/Pods-PhotoClock/Pods-PhotoClock.release.xcconfig"; sourceTree = "<group>"; };
+		A500C12F25CC567F002D17BA /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		A51C547725C211C30019D21F /* PhotoClockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoClockViewController.swift; sourceTree = "<group>"; };
 		A51C547F25C211CF0019D21F /* PhotoClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoClockViewModel.swift; sourceTree = "<group>"; };
 		A51C548525C211E50019D21F /* ViewModelSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelSupport.swift; sourceTree = "<group>"; };
@@ -74,6 +77,7 @@
 		A59F32FF25C9FE6100318EC1 /* SettingSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSections.swift; sourceTree = "<group>"; };
 		A59F331625CA010C00318EC1 /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		A5B58D7D25C3298900DC9567 /* AppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
+		A5D9AAC925CDBCCD006F67C9 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		A5FEFB7325C9F64C00425766 /* LocationServiceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -224,6 +228,7 @@
 			children = (
 				A58CD31725C2107A00827D5D /* AppDelegate.swift */,
 				A559624525C31E2C00D2E995 /* AppDelegate+Extension.swift */,
+				A5D9AAC925CDBCCD006F67C9 /* AppSettings.swift */,
 				A51C54B125C214950019D21F /* Environment.swift */,
 				A58CD32525C2107B00827D5D /* Info.plist */,
 				A58CD32025C2107B00827D5D /* Assets.xcassets */,
@@ -245,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				A59F331625CA010C00318EC1 /* PhotoModel.swift */,
+				A500C12F25CC567F002D17BA /* WeatherModel.swift */,
 			);
 			path = "Data Models";
 			sourceTree = "<group>";
@@ -456,8 +462,10 @@
 				A51C548025C211CF0019D21F /* PhotoClockViewModel.swift in Sources */,
 				A51C548625C211E50019D21F /* ViewModelSupport.swift in Sources */,
 				A59F330025C9FE6100318EC1 /* SettingSections.swift in Sources */,
+				A5D9AACA25CDBCCD006F67C9 /* AppSettings.swift in Sources */,
 				A53F108525CB10D50099D85B /* Date+Extensions.swift in Sources */,
 				A5FEFB7425C9F64C00425766 /* LocationServiceHelper.swift in Sources */,
+				A500C13025CC567F002D17BA /* WeatherModel.swift in Sources */,
 				A51C549425C2122B0019D21F /* RemoteAPI.swift in Sources */,
 				A59F331725CA010C00318EC1 /* PhotoModel.swift in Sources */,
 				A58CD31825C2107A00827D5D /* AppDelegate.swift in Sources */,
