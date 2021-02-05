@@ -1,5 +1,5 @@
 //
-//  iTunesAPI.swift
+//  RemoteAPI.swift
 //  PhotoClock
 //
 //  Created by Douglas Yuen on 2021-01-27.
