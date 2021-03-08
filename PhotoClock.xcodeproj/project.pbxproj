@@ -27,6 +27,7 @@
 		A59F331725CA010C00318EC1 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59F331625CA010C00318EC1 /* PhotoModel.swift */; };
 		A5B58D7E25C3298900DC9567 /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B58D7D25C3298900DC9567 /* AppViewController.swift */; };
 		A5D9AACA25CDBCCD006F67C9 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D9AAC925CDBCCD006F67C9 /* AppSettings.swift */; };
+		A5EC755225F6D529004BE29A /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EC755125F6D529004BE29A /* UIColorExtensions.swift */; };
 		A5FEFB7425C9F64C00425766 /* LocationServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FEFB7325C9F64C00425766 /* LocationServiceHelper.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,7 @@
 		A59F331625CA010C00318EC1 /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		A5B58D7D25C3298900DC9567 /* AppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
 		A5D9AAC925CDBCCD006F67C9 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		A5EC755125F6D529004BE29A /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		A5FEFB7325C9F64C00425766 /* LocationServiceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +140,7 @@
 				A5B58D7D25C3298900DC9567 /* AppViewController.swift */,
 				A51C548525C211E50019D21F /* ViewModelSupport.swift */,
 				A53F108425CB10D50099D85B /* Date+Extensions.swift */,
+				A5EC755125F6D529004BE29A /* UIColorExtensions.swift */,
 			);
 			path = "App Support";
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				A51C549425C2122B0019D21F /* RemoteAPI.swift in Sources */,
 				A59F331725CA010C00318EC1 /* PhotoModel.swift in Sources */,
 				A58CD31825C2107A00827D5D /* AppDelegate.swift in Sources */,
+				A5EC755225F6D529004BE29A /* UIColorExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

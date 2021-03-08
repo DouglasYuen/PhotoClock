@@ -30,6 +30,7 @@ class PhotoClockViewController: AppViewController
 	
 	let viewModel = PhotoClockViewModel()
 	var timer = Timer()
+	let timerInterval = 1.0
 	
 	//********************
 	// MARK:- VIEW CONTROLLER FUNCTIONS
@@ -67,14 +68,14 @@ class PhotoClockViewController: AppViewController
 		self.updateClock()
 		
 		self.BackgroundImageView.contentMode = .scaleAspectFill
-		self.TransparentOverlayView.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 0.45)
+		self.TransparentOverlayView.backgroundColor = UIColor.OverlayClearGrey()
 		
 		self.setInitialBackground() // Set the initial background
 		self.getWeatherAndImage()
 		
 		// Start the clock
 		
-		timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateClock), userInfo: nil, repeats: true)
+		timer = Timer.scheduledTimer(timeInterval: self.timerInterval, target: self, selector: #selector(self.updateClock), userInfo: nil, repeats: true)
 	}
 	
 	// Updates the time labels with the date and time
